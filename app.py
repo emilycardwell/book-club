@@ -21,7 +21,16 @@ st.markdown(
 
 sorted_items = sort_items(items, header=None, direction='vertical')
 
+submissions = 0
 if st.button('Done'):
     st.write(write_data(sorted_items))
+    submissions += 1
 else:
     st.write("click button above to record answers")
+
+
+if submissions == 3:
+    st.write("All participants have voted! Results:")
+    st.write(get_results())
+else:
+    st.write("Waiting for all other votes to be submitted...")

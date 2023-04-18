@@ -23,16 +23,15 @@ def read_data(file_path):
 
     return items
 
-submissions = 0
+
 def write_data(sorted_items):
     with open('ballots.csv', 'w') as final_ballots:
         writer = csv.writer(final_ballots, delimiter=' ', quotechar='|')
         for book in sorted_items:
             writer.writerow(book)
-    submissions += 1
-    if submissions == 3:
-        return "All participants have voted! Results: /n", get_results()
-    return "Finished! Waiting for all other votes to be submitted..."
+
+    return "Finished!"
+
 
 def get_results():
     books = []
