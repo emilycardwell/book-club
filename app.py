@@ -17,7 +17,7 @@ def read_data(file_path):
 
     items = []
     for key, data in sorted_df.iterrows():
-        items.append(f'{data[0]} - {data[1][-1]}')
+        items.append(f'{data[0]} - {data[1].split()[-1]}')
 
     return (items)
 
