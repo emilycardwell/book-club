@@ -1,0 +1,6 @@
+setup.py
+book_club.egg-info/PKG-INFO
+book_club.egg-info/SOURCES.txt
+book_club.egg-info/dependency_links.txt
+book_club.egg-info/requires.txt
+book_club.egg-info/top_level.txt

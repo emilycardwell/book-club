@@ -1,0 +1,12 @@
+data
+
+# Cache
+__pycache__/
+.ipynb_checkpoints
+
+# Personal Env
+.python-version
+requirements.txt
+.env
+setup.py
+.DS_Store
