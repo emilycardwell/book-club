@@ -17,16 +17,19 @@ def read_data(file_path):
 
     items = []
     for key, data in sorted_df.iterrows():
-        items.append(f'{data[0]} - {data[1]}')
+        items.append(f'{data[0]} - {data[1][-1]}')
 
     return (items)
 
 items = read_data(file_path)
 
+# RANKED CHOICE
 books = []
 for i in items:
     books.append(Candidate(i))
 
+submissions = 0
+ballots = []
 
 # STREAMLIT APP
 st.markdown(
@@ -37,11 +40,8 @@ st.markdown(
     """
 )
 
+sorted_books = sort_items(books, header=None, direction='vertical')
 
-sorted_books = sort_items(items, header=None, direction='vertical')
-
-submissions = 0
-ballots = []
 if st.button('Done'):
     ballots.append(Ballot(ranked_candidates=sorted_books))
     st.write("Finished!")
@@ -50,7 +50,7 @@ else:
     st.write("click button above to record answers")
 
 
-# DO RANKED CHOICE VOTE
+# GET RESULTS
 if submissions == 3:
     st.write("All participants have voted!")
     results = pyrankvote.instant_runoff_voting(books, ballots)
