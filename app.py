@@ -28,9 +28,4 @@ if st.button('Done'):
 else:
     st.write("click button above to record answers")
 
-
-if submissions == 3:
-    st.write("All participants have voted! Results:")
-    st.write(get_results())
-else:
-    st.write("Waiting for all other votes to be submitted...")
+st.write(get_results())

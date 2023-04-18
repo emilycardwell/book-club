@@ -34,12 +34,6 @@ def write_data(sorted_items):
 
 
 def get_results():
-    books = []
-    with open('candidates.csv', 'r') as candidates:
-        reader = csv.reader(candidates, delimiter=' ', quotechar='|')
-        for book in reader:
-            books.append(Candidate(book))
-
     ballots = []
     with open('ballots.csv', 'w') as final_ballots:
         reader = csv.reader(final_ballots, delimiter=' ', quotechar='|')
@@ -50,9 +44,18 @@ def get_results():
                 ballot.append(book)
             ballots.append(Ballot(ballot))
 
+    l = len(ballots)
+    if l < 3:
+        return f"Waiting for all other votes to be submitted... ({l}/3)"
+
+    books = []
+    with open('candidates.csv', 'r') as candidates:
+        reader = csv.reader(candidates, delimiter=' ', quotechar='|')
+        for book in reader:
+            books.append(Candidate(book))
 
     results = pyrankvote.instant_runoff_voting(books, ballots)
 
     # winner = results.get_winners()
 
-    return results
+    return "All participants have voted! Results: /n", results
