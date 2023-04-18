@@ -23,13 +23,6 @@ def read_data(file_path):
 
 items = read_data(file_path)
 
-# RANKED CHOICE
-books = []
-for i in items:
-    books.append(Candidate(i))
-
-submissions = 0
-ballots = []
 
 # STREAMLIT APP
 st.markdown(
@@ -40,9 +33,15 @@ st.markdown(
     """
 )
 
-sorted_books = sort_items(books, header=None, direction='vertical')
+sorted_items = sort_items(items, header=None, direction='vertical')
+
+submissions = 0
+ballots = []
+sorted_books = []
 
 if st.button('Done'):
+    for i in items:
+        sorted_books.append(Candidate(i))
     ballots.append(Ballot(ranked_candidates=sorted_books))
     st.write("Finished!")
     submissions += 1
@@ -53,7 +52,7 @@ else:
 # GET RESULTS
 if submissions == 3:
     st.write("All participants have voted!")
-    results = pyrankvote.instant_runoff_voting(books, ballots)
+    results = pyrankvote.instant_runoff_voting(sorted_books, ballots)
     winner = results.get_winners()
     st.write(results)
     st.write("The winner is:")
