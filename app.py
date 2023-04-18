@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import streamlit as st
-from streamlit_sortables import sort_items
+import streamlit_sortables as ss
 import pyrankvote
 from pyrankvote import Candidate, Ballot
 
@@ -34,7 +34,7 @@ st.markdown(
 )
 
 
-sorted_books = sort_items(items, header=None, direction='vertical')
+sorted_books = ss.sort_items(items, header=None, direction='vertical')
 
 submissions = 0
 ballots = []
