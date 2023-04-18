@@ -4,9 +4,6 @@ import csv
 import pyrankvote
 
 
-# VARIABLES
-candidates = 'candidates.csv'
-final_ballots = 'ballots.csv'
 
 # READ CSV & SEND CANDIDATES TO CSV
 def read_data(file_path):
@@ -19,7 +16,7 @@ def read_data(file_path):
     for key, data in sorted_df.iterrows():
         items.append(f'{data[0]} - {data[1].split()[-1]}')
 
-    with open(candidates, 'w') as candidates:
+    with open('candidates.csv', 'w') as candidates:
         writer = csv.writer(candidates, delimiter='; ', quotechar='|')
         for book in items:
             writer.writerow(book)
@@ -28,7 +25,7 @@ def read_data(file_path):
 
 submissions = 0
 def write_data(sorted_items):
-    with open(final_ballots, 'w') as final_ballots:
+    with open('ballots.csv', 'w') as final_ballots:
         writer = csv.writer(final_ballots, delimiter='; ', quotechar='|')
         for book in sorted_items:
             writer.writerow(book)
@@ -39,13 +36,13 @@ def write_data(sorted_items):
 
 def get_results():
     books = []
-    with open(candidates, 'r') as candidates:
+    with open('candidates.csv', 'r') as candidates:
         reader = csv.reader(candidates, delimiter='; ', quotechar='|')
         for book in reader:
             books.append(Candidate(book))
 
     ballots = []
-    with open(final_ballots, 'w') as final_ballots:
+    with open('ballots.csv', 'w') as final_ballots:
         reader = csv.reader(final_ballots, delimiter='; ', quotechar='|')
         for ballot in reader:
             ballot = []
