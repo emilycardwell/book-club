@@ -17,7 +17,7 @@ def read_data(file_path):
         items.append(f'{data[0]} - {data[1].split()[-1]}')
 
     with open('candidates.csv', 'w') as candidates:
-        writer = csv.writer(candidates, delimiter='; ', quotechar='|')
+        writer = csv.writer(candidates, delimiter=' ', quotechar='|')
         for book in items:
             writer.writerow(book)
 
@@ -26,7 +26,7 @@ def read_data(file_path):
 submissions = 0
 def write_data(sorted_items):
     with open('ballots.csv', 'w') as final_ballots:
-        writer = csv.writer(final_ballots, delimiter='; ', quotechar='|')
+        writer = csv.writer(final_ballots, delimiter=' ', quotechar='|')
         for book in sorted_items:
             writer.writerow(book)
     submissions += 1
@@ -37,13 +37,13 @@ def write_data(sorted_items):
 def get_results():
     books = []
     with open('candidates.csv', 'r') as candidates:
-        reader = csv.reader(candidates, delimiter='; ', quotechar='|')
+        reader = csv.reader(candidates, delimiter=' ', quotechar='|')
         for book in reader:
             books.append(Candidate(book))
 
     ballots = []
     with open('ballots.csv', 'w') as final_ballots:
-        reader = csv.reader(final_ballots, delimiter='; ', quotechar='|')
+        reader = csv.reader(final_ballots, delimiter=' ', quotechar='|')
         for ballot in reader:
             ballot = []
             for choice in ballot:
