@@ -18,8 +18,7 @@ def add_ballot(sorted_items: str):
 
 
 @app.get("/get_results")
-def get_results(file_path: str,
-                count: str):
+def get_results(count: str):
 
     ballots_raw = []
 
