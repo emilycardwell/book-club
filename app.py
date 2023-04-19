@@ -12,7 +12,7 @@ books = read_data(file_path)
 # API CALLS
 @st.cache(suppress_st_warning=True)
 def api_write_ballot(ballot: list):
-    url = 'http://localhost:8000/add_ballot'
+    url = 'https://localhost:8000/add_ballot'
     parameters = {'ballot': ballot}
 
     try:
@@ -23,7 +23,7 @@ def api_write_ballot(ballot: list):
     return response
 
 def api_get_results(count: int):
-    url = 'http://localhost:8000/get_results'
+    url = 'https://localhost:8000/get_results'
     parameters = {'count': count}
 
     try:
@@ -34,7 +34,7 @@ def api_get_results(count: int):
     return response
 
 def api_clear_ballots(file_path: str):
-    url = 'http://localhost:8000/clear_ballots'
+    url = 'https://localhost:8000/clear_ballots'
     parameters = {'file_path': file_path}
 
     try:
