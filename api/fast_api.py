@@ -50,8 +50,6 @@ def get_results(count: str):
 
     results = prv.instant_runoff_voting(books, ballots)
 
-    # winner = results.get_winners()
-
     return "All participants have voted! Results: /n", results
 
 

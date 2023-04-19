@@ -23,7 +23,7 @@ def api_write_ballot(ballot: list):
     return response
 
 def api_get_results(count: int):
-    url = 'https://localhost:8000/get_results'
+    url = 'http://localhost:8000/get_results'
     parameters = {'count': count}
 
     try:
@@ -34,7 +34,7 @@ def api_get_results(count: int):
     return response
 
 def api_clear_ballots(file_path: str):
-    url = 'https://localhost:8000/clear_ballots'
+    url = 'http://localhost:8000/clear_ballots'
     parameters = {'file_path': file_path}
 
     try:
@@ -50,7 +50,7 @@ st.markdown(
     """
     # Book Club Ranked Choice App
 
-    Rearrange the titles below (first place on top, last place on bottom)
+    Rearrange the titles below (first-place on top, last-place on bottom)
     """
 )
 
