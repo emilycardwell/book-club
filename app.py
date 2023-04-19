@@ -49,5 +49,5 @@ ballot = sort_items(books, header=None, direction='vertical')
 if st.button('Record Answers'):
     st.write(api_write_ballot(ballot))
 
-
-st.write(get_results(file_path))
+if st.button('Get Results'):
+    st.write(api_get_results(3))
