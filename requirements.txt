@@ -2,3 +2,5 @@ pyrankvote
 pandas
 streamlit
 streamlit-sortables
+fastapi
+uvicorn
