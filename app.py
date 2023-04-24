@@ -11,7 +11,7 @@ books = read_data(file_path)
 
 # API CALLS
 def api_write_ballot(ballot: list):
-    url = 'https://localhost:8000/add_ballot'
+    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/add_ballot'
     parameters = {'ballot': ballot}
     print(parameters)
 
@@ -23,7 +23,7 @@ def api_write_ballot(ballot: list):
     return response
 
 def api_get_results(count: int):
-    url = 'http://localhost:8000/get_results'
+    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/get_results'
     parameters = {'count': count}
 
     try:
@@ -34,7 +34,7 @@ def api_get_results(count: int):
     return response
 
 def api_clear_ballots(file_path: str):
-    url = 'http://localhost:8000/clear_ballots'
+    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
     parameters = {'file_path': file_path}
 
     try:
@@ -58,7 +58,6 @@ ballot = sort_items(books, header=None, direction='vertical')
 
 
 if st.button('Record Answers'):
-    st.write(ballot)
     st.write(api_write_ballot(ballot))
 
 if st.button('Get Results'):
