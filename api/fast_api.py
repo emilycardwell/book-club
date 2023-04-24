@@ -20,7 +20,7 @@ app.add_middleware(
 def add_ballot(sorted_items: str):
     with open('data/ballots.csv', 'a') as final_ballots:
         writer = csv.writer(final_ballots)
-        writer.writerow(list(sorted_items))
+        writer.writerow(sorted_items)
         final_ballots.close()
 
     return "Finished!"

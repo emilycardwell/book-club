@@ -13,6 +13,7 @@ books = read_data(file_path)
 def api_write_ballot(ballot: list):
     url = 'https://localhost:8000/add_ballot'
     parameters = {'ballot': ballot}
+    print(parameters)
 
     try:
         response = requests.get(url, params=parameters).json()
