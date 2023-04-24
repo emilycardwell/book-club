@@ -33,12 +33,11 @@ def api_get_results(count: int):
 
     return response
 
-def api_clear_ballots(file_path: str):
+def api_clear_ballots():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
-    parameters = {'file_path': file_path}
 
     try:
-        response = requests.get(url, params=parameters).json()
+        response = requests.get(url).json()
     except:
         response = 'Input Error, try again'
 
