@@ -57,7 +57,7 @@ ballot = sort_items(books, header=None, direction='vertical')
 
 ballots_form = []
 for a in ballot:
-    st.write(type(a))
+    st.write(a)
     break
     b = a.lower()
     c = b.replace(' - ', '-')
