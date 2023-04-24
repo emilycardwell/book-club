@@ -19,31 +19,66 @@ app.add_middleware(
 @app.get("/add_ballot")
 def add_ballot(sorted_items: List[str] = Query(None)):
 
+    n = 0
+    with open('data/ballots.csv', 'r') as final_ballots:
+        reader = csv.reader(final_ballots)
+        for i in reader:
+            n += 1
+
     with open('data/ballots.csv', 'a') as final_ballots:
         writer = csv.writer(final_ballots)
         writer.writerow(sorted_items)
         final_ballots.close()
 
-    return "Finished!"
+    n2 = 0
+    with open('data/ballots.csv', 'r') as final_ballots:
+        reader = csv.reader(final_ballots)
+        for i in reader:
+            n2 += 1
+
+    if n+1 == n2:
+        return "Finished!"
+    else:
+        return "Ballot not recorded, please press button again"
+
+
+@app.get("/undo_ballot")
+def add_ballot():
+
+    undo_ballots = []
+    with open('data/ballots.csv', 'r') as ballots:
+        reader = csv.reader(ballots)
+        for i in reader:
+            undo_ballots.append(i)
+        ballots.close()
+
+    with open('data/ballots.csv', 'w') as ballots:
+        writer = csv.writer(ballots)
+        for j in range(len(undo_ballots)-1):
+            writer.writerow(undo_ballots[j])
+        ballots.close()
+
+    return "Last ballot cleared!"
 
 
 @app.get("/get_results")
 def get_results(count: str):
 
+    c = int(count)
     ballots_raw = []
 
     with open('data/ballots.csv', 'r') as final_ballots:
         reader = csv.reader(final_ballots)
-        c = 0
+        b = 0
         for i in reader:
             ballots_raw.append(i)
-            c += 1
+            b += 1
 
-        if int(count) < c:
-            return f"Waiting for all other votes to be submitted... ({c}/3)"
+        if c > b:
+            return f"Waiting for all other votes to be submitted... ({b}/{c})"
 
-        if int(count) > c:
-            return f"Too many ballots have been submitted: ({c}/3)... press button below"
+        if c < b:
+            return f"Too many ballots have been submitted: ({b}/{c})... press button below"
 
         final_ballots.close()
 

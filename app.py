@@ -22,6 +22,16 @@ def api_write_ballot(sorted_items: list):
 
     return response
 
+def api_undo_ballot():
+    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/undo_ballot'
+
+    try:
+        response = requests.get(url).json()
+    except:
+        response = 'Input Error, try again'
+
+    return response
+
 def api_get_results(count: int):
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/get_results'
     parameters = {'count': count}
@@ -42,6 +52,7 @@ def api_clear_ballots():
         response = 'Input Error, try again'
 
     return response
+
 
 
 # STREAMLIT APP
@@ -66,8 +77,11 @@ for a in ballot:
 if st.button('Record Answers'):
     st.write(api_write_ballot(ballots_form))
 
+if st.button('Undo Ballot'):
+    st.write(api_undo_ballot(3))
+
 if st.button('Get Results'):
     st.write(api_get_results(3))
 
-if st.button("Don't Press Me"):
+if st.button("Clear All Ballots"):
     st.write(api_clear_ballots())
