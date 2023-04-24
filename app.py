@@ -57,6 +57,8 @@ ballot = sort_items(books, header=None, direction='vertical')
 
 ballots_form = []
 for a in ballot:
+    st.write(type(a))
+    break
     b = a.lower()
     c = b.replace(' - ', '-')
     d = c.replace(' ', '-')
@@ -64,7 +66,6 @@ for a in ballot:
     ballots_form.append(e)
 
 if st.button('Record Answers'):
-    st.write(ballots_form)
     st.write(api_write_ballot(ballots_form))
 
 if st.button('Get Results'):
