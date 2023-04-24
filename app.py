@@ -10,9 +10,9 @@ file_path = 'data/Feb2023.csv'
 books = read_data(file_path)
 
 # API CALLS
-def api_write_ballot(ballot: list):
+def api_write_ballot(sorted_items: list):
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/add_ballot'
-    parameters = {'ballot': ballot}
+    parameters = {'sorted_items': sorted_items}
 
     try:
         response = requests.get(url, params=parameters).json()
@@ -54,10 +54,15 @@ st.markdown(
 
 ballot = sort_items(books, header=None, direction='vertical')
 
+ballots_form = []
+for a in ballot:
+    b = a.lower()
+    c = b.replace(' - ', '-')
+    d = c.replace(' ', '-')
+    ballots_form.append(d)
 
 if st.button('Record Answers'):
-    st.write(type(ballot))
-    st.write(api_write_ballot(ballot))
+    st.write(api_write_ballot(ballots_form))
 
 if st.button('Get Results'):
     st.write(api_get_results(3))
