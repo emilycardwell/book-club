@@ -10,7 +10,7 @@ file_path = 'data/Feb2023.csv'
 books = read_data(file_path)
 
 # API CALLS
-@st.cache(suppress_st_warning=True)
+@st.cache_data(suppress_st_warning=True)
 def api_write_ballot(ballot: list):
     url = 'https://localhost:8000/add_ballot'
     parameters = {'ballot': ballot}
@@ -58,10 +58,11 @@ ballot = sort_items(books, header=None, direction='vertical')
 
 
 if st.button('Record Answers'):
+    st.write(ballot)
     st.write(api_write_ballot(ballot))
 
 if st.button('Get Results'):
     st.write(api_get_results(3))
 
 if st.button("Don't Press Me"):
-    st.write(api_clear_ballots(file_path))
+    st.write(api_clear_ballots())

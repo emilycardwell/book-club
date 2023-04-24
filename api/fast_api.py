@@ -63,8 +63,8 @@ def get_results(count: str):
 
 
 @app.get("/clear_ballots")
-def clear_ballots(file_path: str):
-    with open(file_path, 'w') as candidates:
+def clear_ballots():
+    with open('data/ballots.csv', 'w') as candidates:
         writer = csv.writer(candidates)
         candidates.close()
 
