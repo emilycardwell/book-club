@@ -10,7 +10,6 @@ file_path = 'data/Feb2023.csv'
 books = read_data(file_path)
 
 # API CALLS
-@st.cache_data(suppress_st_warning=True)
 def api_write_ballot(ballot: list):
     url = 'https://localhost:8000/add_ballot'
     parameters = {'ballot': ballot}
