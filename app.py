@@ -62,6 +62,7 @@ for a in ballot:
     ballots_form.append(d)
 
 if st.button('Record Answers'):
+    st.write(ballots_form)
     st.write(api_write_ballot(ballots_form))
 
 if st.button('Get Results'):
