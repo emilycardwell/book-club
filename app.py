@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_sortables import sort_items
 import requests
+import re
 
 from data_editing import read_data
 
@@ -59,7 +60,8 @@ for a in ballot:
     b = a.lower()
     c = b.replace(' - ', '-')
     d = c.replace(' ', '-')
-    ballots_form.append(d)
+    e = re.sub(r'[^\w\s]', '', d)
+    ballots_form.append(e)
 
 if st.button('Record Answers'):
     st.write(ballots_form)
