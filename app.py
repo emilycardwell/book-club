@@ -13,7 +13,6 @@ books = read_data(file_path)
 def api_write_ballot(ballot: list):
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/add_ballot'
     parameters = {'ballot': ballot}
-    print(parameters)
 
     try:
         response = requests.get(url, params=parameters).json()
@@ -57,6 +56,7 @@ ballot = sort_items(books, header=None, direction='vertical')
 
 
 if st.button('Record Answers'):
+    st.write(type(ballot))
     st.write(api_write_ballot(ballot))
 
 if st.button('Get Results'):
