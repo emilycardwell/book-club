@@ -60,7 +60,7 @@ for a in ballot:
     b = a.lower()
     c = b.replace(' - ', '-')
     d = c.replace(' ', '_')
-    e = re.sub(r'[^\w\s-_]', '', d)
+    e = re.sub(r'[^\w\s_-]', '', d)
     ballots_form.append(e)
 
 if st.button('Record Answers'):
