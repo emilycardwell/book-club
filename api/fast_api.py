@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 import csv
 import pyrankvote as prv
-
+from typing import List
 
 
 app = FastAPI()
@@ -17,7 +17,8 @@ app.add_middleware(
 
 
 @app.get("/add_ballot")
-def add_ballot(sorted_items: str):
+def add_ballot(sorted_items: List[str] = Query(None)):
+    
     with open('data/ballots.csv', 'a') as final_ballots:
         writer = csv.writer(final_ballots)
         writer.writerow(sorted_items)
@@ -38,8 +39,11 @@ def get_results(count: str):
             ballots_raw.append(i)
             c += 1
 
-        if int(count) != c:
+        if int(count) < c:
             return f"Waiting for all other votes to be submitted... ({c}/3)"
+
+        if int(count) > c:
+            return f"Too many ballots have been submitted: ({c}/3)... press button below"
 
         final_ballots.close()
 
@@ -64,11 +68,24 @@ def get_results(count: str):
 
 @app.get("/clear_ballots")
 def clear_ballots():
-    with open('data/ballots.csv', 'w') as candidates:
-        writer = csv.writer(candidates)
-        candidates.close()
+    with open('data/ballots.csv', 'w') as ballots:
+        writer = csv.writer(ballots)
+        ballots.close()
 
     return "Ballots Cleared!"
+
+
+@app.get("/show_ballots")
+def clear_ballots():
+    ballots_raw = []
+
+    with open('data/ballots.csv', 'r') as ballots:
+        reader = csv.reader(ballots)
+        for i in reader:
+            ballots_raw.append(i)
+        ballots.close()
+
+    return ballots_raw
 
 @app.get("/")
 def root():
