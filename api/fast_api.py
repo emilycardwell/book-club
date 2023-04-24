@@ -63,7 +63,9 @@ def get_results(count: str):
 
     results = prv.instant_runoff_voting(books, ballots)
 
-    return "All participants have voted!", results
+    winner = results.get_winners()
+
+    return "All participants have voted!", winner[0]
 
 
 @app.get("/clear_ballots")
