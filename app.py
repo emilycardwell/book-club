@@ -63,7 +63,7 @@ for a in ballot:
     e = re.sub(r'[^\w\s-]', '', d)
     ballots_form.append(e)
 
-st.write(ballots_form)
+st.write(ballots_form[0])
 
 if st.button('Record Answers'):
     st.write(api_write_ballot(ballots_form))
