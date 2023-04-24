@@ -18,7 +18,7 @@ app.add_middleware(
 
 @app.get("/add_ballot")
 def add_ballot(sorted_items: List[str] = Query(None)):
-    
+
     with open('data/ballots.csv', 'a') as final_ballots:
         writer = csv.writer(final_ballots)
         writer.writerow(sorted_items)
@@ -63,7 +63,7 @@ def get_results(count: str):
 
     results = prv.instant_runoff_voting(books, ballots)
 
-    return "All participants have voted! Results: /n", results
+    return "All participants have voted!", results
 
 
 @app.get("/clear_ballots")
