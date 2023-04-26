@@ -42,7 +42,7 @@ def api_get_results():
     except:
         response = 'Input Error, try again'
 
-    return response
+    return response[1]['name']
 
 def api_clear_ballots():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
