@@ -1,3 +1,8 @@
-pyrankvote
 pandas
 streamlit
+streamlit-sortables
+fastapi
+uvicorn
+pyrankvote
+httpx
+pytest-asyncio

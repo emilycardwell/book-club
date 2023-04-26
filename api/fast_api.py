@@ -3,11 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import csv
 import pyrankvote as prv
 from typing import List
-import os
 
-people = os.getenv['PEOPLE']
-
-
+people = 3
 app = FastAPI()
 
 app.add_middleware(

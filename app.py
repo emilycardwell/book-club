@@ -2,17 +2,15 @@ import streamlit as st
 from streamlit_sortables import sort_items
 import requests
 import re
-import os
-
-people = os.getenv['PEOPLE']
 
 from data_editing import read_data
-
 
 
 # VARIABLES
 file_path = 'data/ALE_Apr2023.csv'
 books = read_data(file_path)
+people = 3
+
 
 # API CALLS
 def api_write_ballot(sorted_items: list):

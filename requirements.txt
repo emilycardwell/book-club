@@ -1,6 +1,15 @@
-pyrankvote
+#utils
 pandas
+
+#app
 streamlit
 streamlit-sortables
+
+#api
 fastapi
 uvicorn
+pyrankvote
+
+#tests
+httpx
+pytest-asyncio

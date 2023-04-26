@@ -1,24 +1,22 @@
 # PACKAGES
 reinstall_package:
-	@pip uninstall -y bookclub || :
+	@pip uninstall -r requirements.txt -y
+	@pip install --upgrade pip
 	@pip install -e .
 
 
 # COMMANDS
-run_api_get_results:
-	python -c 'from book-club.app import api_get_results; api_get_results()'
-
 build_docker_local_dev:
-	docker build --tag={GCR_IMAGE}:dev .
+	docker build --tag=${GCR_IMAGE}:dev .
 
 build_docker_gcp_dev:
-	docker build --tag {GCR_MULTI_REGION}/{GCP_PROJECT}/{GCR_IMAGE}:dev .
+	docker build --tag ${GCR_MULTI_REGION}/${GCP_PROJECT}/${GCR_IMAGE}:dev .
 
 run_docker_local_dev:
-	docker run -it -e PORT=8000 -p 8000:8000 {GCR_IMAGE}:dev
+	docker run -it -e PORT=8000 -p 8000:8000 ${GCR_IMAGE}:dev
 
 push_docker_gcp_dev:
-	docker push {GCR_MULTI_REGION}/{GCP_PROJECT}/{GCR_IMAGE}:dev .
+	docker push ${GCR_MULTI_REGION}/${GCP_PROJECT}/${GCR_IMAGE}:dev
 
 
 # TESTS
@@ -63,11 +61,18 @@ list:
 	@echo "\n    $(ccgreen)$(fbold)environment rules:$(ccreset)"
 	@echo "\n        $(fbold)show_env$(ccreset)"
 	@echo "            Show the environment variables used by the package by category."
+	@echo "\n        $(fbold)reinstall_package$(ccreset)"
+
+	@echo "\n$(ccgreen)$(fbold)COMMANDS$(ccreset)"
+
+	@echo "\n    $(fbold)build_docker_local_dev$(ccreset)"
+	@echo "\n    $(fbold)build_docker_gcp_dev$(ccreset)"
+	@echo "\n    $(fbold)run_docker_local_dev$(ccreset)"
+	@echo "\n    $(fbold)push_docker_gcp_dev$(ccreset)"
 
 	@echo "\n$(ccgreen)$(fbold)TESTS$(ccreset)"
 
-	@echo "\n    $(ccgreen)$(fbold)student rules:$(ccreset)"
-	@echo "\n        $(fbold)reinstall_package$(ccreset)"
-	@echo "            Install the version of the package corresponding to the challenge."
-	@echo "\n        $(fbold)test_cloud_training$(ccreset)"
-	@echo "            Run the tests."
+	@echo "\n    $(fbold)test_gcp_setup$(ccreset)"
+	@echo "\n    $(fbold)test_gcp_project$(ccreset)"
+	@echo "\n    $(fbold)test_api$(ccreset)"
+	@echo "            Runs API root & get_results."
