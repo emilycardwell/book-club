@@ -36,10 +36,9 @@ def api_undo_ballot():
 
 def api_get_results():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/get_results'
-    parameters = {'count': people}
 
     try:
-        response = requests.get(url, params=parameters).json()
+        response = requests.get(url).json()
     except:
         response = 'Input Error, try again'
 
