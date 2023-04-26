@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import csv
 import pyrankvote as prv
 from typing import List
+import os
+
+people = os.getenv['PEOPLE']
 
 
 app = FastAPI()
@@ -62,9 +65,8 @@ def add_ballot():
 
 
 @app.get("/get_results")
-def get_results(count: str):
+def get_results():
 
-    c = int(count)
     ballots_raw = []
 
     with open('data/ballots.csv', 'r') as final_ballots:
@@ -74,11 +76,11 @@ def get_results(count: str):
             ballots_raw.append(i)
             b += 1
 
-        if c > b:
-            return f"Waiting for all other votes to be submitted... ({b}/{c})"
+        if people > b:
+            return f"Waiting for all other votes to be submitted... ({b}/{people})"
 
-        if c < b:
-            return f"Too many ballots have been submitted: ({b}/{c})... press button below"
+        if people < b:
+            return f"Too many ballots have been submitted: ({b}/{people})... press button below"
 
         final_ballots.close()
 

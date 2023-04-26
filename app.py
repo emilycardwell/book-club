@@ -2,8 +2,12 @@ import streamlit as st
 from streamlit_sortables import sort_items
 import requests
 import re
+import os
+
+people = os.getenv['PEOPLE']
 
 from data_editing import read_data
+
 
 
 # VARIABLES
@@ -32,9 +36,9 @@ def api_undo_ballot():
 
     return response
 
-def api_get_results(count: int):
+def api_get_results():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/get_results'
-    parameters = {'count': count}
+    parameters = {'count': people}
 
     try:
         response = requests.get(url, params=parameters).json()
@@ -78,7 +82,7 @@ if st.button('Record Answers'):
     st.write(api_write_ballot(ballots_form))
 
 if st.button('Undo Ballot'):
-    st.write(api_undo_ballot(3))
+    st.write(api_undo_ballot())
 
 if st.button('Get Results'):
     st.write(api_get_results(3))
