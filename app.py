@@ -42,7 +42,7 @@ def api_get_results():
     except:
         response = 'Input Error, try again'
 
-    return type(response[1]), response[1]
+    return type(response), response
 
 def api_clear_ballots():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
@@ -82,7 +82,9 @@ if st.button('Undo Ballot'):
     st.write(api_undo_ballot())
 
 if st.button('Get Results'):
-    st.write(api_get_results())
+    t, result = api_get_results()
+    st.write(t)
+    st.write(result)
 
 if st.button("Clear All Ballots"):
     st.write(api_clear_ballots())
