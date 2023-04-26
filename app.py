@@ -82,7 +82,7 @@ if st.button('Undo Ballot'):
     st.write(api_undo_ballot())
 
 if st.button('Get Results'):
-    st.write(api_get_results(3))
+    st.write(api_get_results())
 
 if st.button("Clear All Ballots"):
     st.write(api_clear_ballots())
