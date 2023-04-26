@@ -44,7 +44,7 @@ def api_get_results():
 
     winner = dict(response[1])
 
-    return type(winner), winner
+    return winner['name']
 
 def api_clear_ballots():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
@@ -83,9 +83,7 @@ if st.button('Undo Ballot'):
     st.write(api_undo_ballot())
 
 if st.button('Get Results'):
-    t, result = api_get_results()
-    st.write(t)
-    st.write(result)
+    st.write(api_get_results())
 
 if st.button("Clear All Ballots"):
     st.write(api_clear_ballots())
