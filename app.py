@@ -42,7 +42,9 @@ def api_get_results():
     except:
         response = 'Input Error, try again'
 
-    return type(response[0]), response[0]
+    winner = dict(response[1])
+
+    return type(winner), winner
 
 def api_clear_ballots():
     url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
