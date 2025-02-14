@@ -60,9 +60,11 @@ def api_clear_ballots():
 # STREAMLIT APP
 st.markdown(
     """
-    # Book Club Ranked Choice App
-
-    Rearrange the titles below (first-place on top, last-place on bottom)
+    # Ranked Choice Voting for Book Club
+    ### This is a sample ballot. You can test the results by submitting a few times,\
+    then clicking 'Get Results.'
+    ##
+    Rearrange the titles below: 1st place on top, last-place on bottom
     """
 )
 
@@ -76,14 +78,18 @@ for a in ballot:
     e = re.sub(r'[^\w\s_-]', '', d)
     ballots_form.append(e)
 
-if st.button('Record Answers'):
+st.markdown('###')
+
+if st.button('Submit Answers', type='primary'):
     st.write(api_write_ballot(ballots_form))
 
-if st.button('Undo Ballot'):
+if st.button('Undo Ballot', type='secondary'):
     st.write(api_undo_ballot())
 
-if st.button('Get Results'):
+st.markdown('##')
+
+if st.button('Get Results', type='primary'):
     st.write(api_get_results())
 
-if st.button("Clear All Ballots"):
+if st.button("Clear All Ballots", type='secondary'):
     st.write(api_clear_ballots())
