@@ -20,18 +20,18 @@ app.add_middleware(
 def add_ballot(sorted_items: List[str] = Query(None)):
 
     n = 0
-    with open('data/ballots.csv', 'r') as final_ballots:
+    with open('test_data/test_ballots.csv', 'r') as final_ballots:
         reader = csv.reader(final_ballots)
         for i in reader:
             n += 1
 
-    with open('data/ballots.csv', 'a') as final_ballots:
+    with open('test_data/test_ballots.csv', 'a') as final_ballots:
         writer = csv.writer(final_ballots)
         writer.writerow(sorted_items)
         final_ballots.close()
 
     n2 = 0
-    with open('data/ballots.csv', 'r') as final_ballots:
+    with open('test_data/test_ballots.csv', 'r') as final_ballots:
         reader = csv.reader(final_ballots)
         for i in reader:
             n2 += 1
@@ -46,13 +46,13 @@ def add_ballot(sorted_items: List[str] = Query(None)):
 def add_ballot():
 
     undo_ballots = []
-    with open('data/ballots.csv', 'r') as ballots:
+    with open('test_data/test_ballots.csv', 'r') as ballots:
         reader = csv.reader(ballots)
         for i in reader:
             undo_ballots.append(i)
         ballots.close()
 
-    with open('data/ballots.csv', 'w') as ballots:
+    with open('test_data/test_ballots.csv', 'w') as ballots:
         writer = csv.writer(ballots)
         for j in range(len(undo_ballots)-1):
             writer.writerow(undo_ballots[j])
@@ -66,7 +66,7 @@ def get_results():
 
     ballots_raw = []
 
-    with open('data/ballots.csv', 'r') as final_ballots:
+    with open('test_data/test_ballots.csv', 'r') as final_ballots:
         reader = csv.reader(final_ballots)
         b = 0
         for i in reader:
@@ -104,7 +104,7 @@ def get_results():
 
 @app.get("/clear_ballots")
 def clear_ballots():
-    with open('data/ballots.csv', 'w') as ballots:
+    with open('test_data/test_ballots.csv', 'w') as ballots:
         writer = csv.writer(ballots)
         ballots.close()
 
@@ -115,7 +115,7 @@ def clear_ballots():
 def clear_ballots():
     ballots_raw = []
 
-    with open('data/ballots.csv', 'r') as ballots:
+    with open('test_data/test_ballots.csv', 'r') as ballots:
         reader = csv.reader(ballots)
         for i in reader:
             ballots_raw.append(i)
