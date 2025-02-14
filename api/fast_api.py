@@ -99,7 +99,7 @@ def get_results():
 
     winner = results.get_winners()
 
-    return "All participants have voted!", winner[0]
+    return "The winner is:\n", winner
 
 
 @app.get("/clear_ballots")
