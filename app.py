@@ -12,28 +12,22 @@ gcr_url = os.getenv('GCR_URL')
 file_path = 'test_data/test_options.csv'
 books = read_data(file_path)
 
-
-def catch_error(url, parameters=None):
-    try:
-        response = requests.get(url, params=parameters).json()
-    except:
-        response = 'Input Error, try again'
-    return response
-
 # API CALLS
 def api_write_ballot(sorted_items: list):
     url = f'{gcr_url}/add_ballot'
     parameters = {'sorted_items': sorted_items}
-    return catch_error(url, parameters)
+    response = requests.get(url, params=parameters).json()
+    return response
 
 def api_undo_ballot():
     url = f'{gcr_url}/undo_ballot'
-    return catch_error(url)
+    response = requests.get(url).json()
+    return response
 
 
 def api_get_results():
     url = f'{gcr_url}/get_results'
-    response =  catch_error(url)
+    response = requests.get(url).json()
 
     try:
         winner = dict(response[1])
@@ -44,7 +38,8 @@ def api_get_results():
 
 def api_clear_ballots():
     url = f'{gcr_url}/clear_ballots'
-    return catch_error(url)
+    response = requests.get(url).json()
+    return response
 
 
 # STREAMLIT APP
