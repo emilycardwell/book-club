@@ -8,9 +8,6 @@ def read_data(file_path):
 
     sorted_df = books_df.sort_values('Book').reset_index(drop=True)
     thin_df = sorted_df.loc[:, ['Book', 'Author']]
-
-    items = []
-    for key, data in thin_df.iterrows():
-        items.append(f'{data[0]} - {data[1].split()[-1]}')
+    items = [f'{data.iloc[0]} - {data.iloc[1].split()[-1]}' for _, data in thin_df.iterrows()]
 
     return items
