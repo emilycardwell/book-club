@@ -3,7 +3,7 @@ pandas
 
 #app
 streamlit
-streamlit-sortables
+streamlit_sortables
 
 #api
 fastapi
