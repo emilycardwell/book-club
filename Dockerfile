@@ -3,7 +3,7 @@ FROM python:3-slim
 COPY setup.py /setup.py
 COPY api /api
 COPY requirements.txt /requirements.txt
-COPY data /data
+COPY test_data /test_data
 
 RUN pip install --upgrade pip
 RUN pip install -e .
