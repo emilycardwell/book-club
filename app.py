@@ -46,7 +46,7 @@ def api_clear_ballots():
 st.markdown(
     """
     # Ranked Choice Voting for Book Club
-    ### This is a sample ballot. You can test the results by submitting a few times,\
+    ### This is a sample ballot. You can test the results by submitting a 2-3 times,\
     then clicking 'Get Results.'
     ##
     Rearrange the titles below: 1st place on top, last-place on bottom
