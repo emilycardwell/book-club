@@ -28,12 +28,11 @@ def api_undo_ballot():
 def api_get_results():
     url = f'{gcr_url}/get_results'
     response = requests.get(url).json()
-
-    try:
-        # winner = dict(response[1])
+    if type(response) == str:
         return response
-    except:
-        return f'Incorrect results format: {response}'
+    else:
+        winner = response[0]['name'].replace('_', ' ').replace('-', ' - ').title()
+        return f"The winner is: {winner}"
 
 
 def api_clear_ballots():
