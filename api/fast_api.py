@@ -96,7 +96,6 @@ def get_results():
         j += 1
 
     results = prv.instant_runoff_voting(books, ballots)
-
     winner = results.get_winners()
 
     return winner
