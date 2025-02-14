@@ -32,8 +32,9 @@ def api_get_results():
         return response
     else:
         winner = response[0]['name'].replace('_', ' ').replace('-', ' - ').title()
-        return f"The winner is: {winner}"
+        return f"The winner is: \n{winner}"
 
+st.markdown('##')
 
 def api_clear_ballots():
     url = f'{gcr_url}/clear_ballots'
