@@ -2,59 +2,50 @@ import streamlit as st
 from streamlit_sortables import sort_items
 import requests
 import re
+import os
 
 from data_editing import read_data
 
+gcr_url = os.getenv('GCR_URL')
 
 # VARIABLES
 file_path = 'test_data/test_options.csv'
 books = read_data(file_path)
-people = 3
 
 
-# API CALLS
-def api_write_ballot(sorted_items: list):
-    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/add_ballot'
-    parameters = {'sorted_items': sorted_items}
-
+def catch_error(url, parameters=None):
     try:
         response = requests.get(url, params=parameters).json()
     except:
         response = 'Input Error, try again'
-
     return response
+
+# API CALLS
+def api_write_ballot(sorted_items: list):
+    url = f'{gcr_url}/add_ballot'
+    parameters = {'sorted_items': sorted_items}
+    return catch_error(url, parameters)
 
 def api_undo_ballot():
-    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/undo_ballot'
+    url = f'{gcr_url}/undo_ballot'
+    return catch_error(url)
 
-    try:
-        response = requests.get(url).json()
-    except:
-        response = 'Input Error, try again'
-
-    return response
 
 def api_get_results():
-    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/get_results'
+    url = f'{gcr_url}/get_results'
+    response =  catch_error(url)
 
     try:
-        response = requests.get(url).json()
+        winner = dict(response[1])
+        return winner['name']
     except:
-        response = 'Input Error, try again'
+        return f'Incorrect results format: {response}'
 
-    winner = dict(response[1])
 
-    return winner['name']
 
 def api_clear_ballots():
-    url = 'https://book-club-zkfrzn26zq-oa.a.run.app/clear_ballots'
-
-    try:
-        response = requests.get(url).json()
-    except:
-        response = 'Input Error, try again'
-
-    return response
+    url = f'{gcr_url}/clear_ballots'
+    return catch_error(url)
 
 
 # STREAMLIT APP
