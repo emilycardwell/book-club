@@ -6,7 +6,7 @@ import os
 
 from data_editing import read_data
 
-gcr_url = os.getenv('GCR_URL')
+gcr_url = "https://book-club-516871165278.europe-west6.run.app"
 
 # VARIABLES
 file_path = 'test_data/test_options.csv'
