@@ -42,7 +42,6 @@ def api_get_results():
         return f'Incorrect results format: {response}'
 
 
-
 def api_clear_ballots():
     url = f'{gcr_url}/clear_ballots'
     return catch_error(url)
