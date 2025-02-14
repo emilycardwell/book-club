@@ -32,9 +32,7 @@ def api_get_results():
         return response
     else:
         winner = response[0]['name'].replace('_', ' ').replace('-', ' - ').title()
-        return f"The winner is: \n{winner}"
-
-st.markdown('##')
+        return f"The winner is: {winner}"
 
 def api_clear_ballots():
     url = f'{gcr_url}/clear_ballots'
@@ -74,7 +72,7 @@ if st.button('Undo Ballot', type='secondary'):
 st.markdown('##')
 
 if st.button('Get Results', type='primary'):
-    st.write(api_get_results())
+    st.markdown(f'##### {api_get_results()}')
 
 if st.button("Clear All Ballots", type='secondary'):
     st.write(api_clear_ballots())
