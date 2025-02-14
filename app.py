@@ -30,8 +30,8 @@ def api_get_results():
     response = requests.get(url).json()
 
     try:
-        winner = dict(response[1])
-        return winner['name']
+        # winner = dict(response[1])
+        return response
     except:
         return f'Incorrect results format: {response}'
 
